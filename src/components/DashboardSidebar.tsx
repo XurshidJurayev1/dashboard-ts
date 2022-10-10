@@ -8,6 +8,8 @@ import {Link} from "react-router-dom";
 import {HiOutlineClipboardCheck} from 'react-icons/hi'
 import SidebarSelectComponent from "./SidebarSelectComponent";
 
+import {ReactComponent as Logo} from "../assets/svg/logo.svg";
+
 
 const Main = styled.div`
   display: flex;
@@ -22,6 +24,17 @@ const SidebarHeader = styled.div`
   display: flex;
   flex-direction: column;
 
+`
+
+const LogoCom = styled.div`
+  margin-left: 8px;
+  width: 32px;
+  height: 32px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const SidebarHeaderItem = styled.div`
@@ -210,7 +223,9 @@ const DashboardSidebar: FC = (): JSX.Element => {
     return <Main>
         <SidebarHeader>
             <SidebarHeaderItem>
-                <>logo</>
+                <LogoCom>
+                    <Logo />
+                </LogoCom>
                 <div>
                     <div id="notify">
                         {
