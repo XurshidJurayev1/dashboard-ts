@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Outlet} from 'react-router-dom';
 import styled from 'styled-components';
 import DashboardSidebar from '../components/DashboardSidebar';
@@ -35,18 +35,19 @@ const Content = styled.div<{ isOpen: boolean }>`
 `;
 
 const DashboardLayout: FC = (): JSX.Element => {
-    const isOpen = true;
-    return (
-        <Main>
-            <SideBar isOpen={isOpen}>
-                <DashboardSidebar />
-            </SideBar>
-            <Content isOpen={isOpen}>
-                <DashboardHeader />
-                <Outlet />
-            </Content>
-        </Main>
-    );
-};
+        const [isOpen, setIsOpen] = useState<boolean>(true)
+        return (
+            <Main>
+                <SideBar isOpen={isOpen}>
+                    <DashboardSidebar />
+                </SideBar>
+                <Content isOpen={isOpen}>
+                    <DashboardHeader />
+                    <Outlet />
+                </Content>
+            </Main>
+        );
+    }
+;
 
 export default DashboardLayout;

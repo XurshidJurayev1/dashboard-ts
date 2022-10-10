@@ -1,9 +1,13 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import styled from "styled-components";
 import {HiOutlineMenu, HiOutlineChatAlt2} from 'react-icons/hi'
 import {BsArrowsFullscreen, BsBookmark} from 'react-icons/bs'
 import {AiOutlineSearch} from 'react-icons/ai'
 import {TbInbox} from 'react-icons/tb'
+import {ReactComponent as Usa} from "../assets/svg/US.svg";
+import {ReactComponent as Tr} from "../assets/svg/TR.svg";
+import i18Next from "../i18Next";
+import {useTranslation} from "react-i18next";
 
 const Main = styled.div`
   display: flex;
@@ -61,6 +65,7 @@ const Icon = styled.div`
   border-radius: 50%;
   position: relative;
   cursor: pointer;
+  transition: all .1s ease;
 
   &:hover {
     transition: all .1s ease;
@@ -105,13 +110,95 @@ const Icon = styled.div`
 
 `
 
+const LangContainer = styled.div`
+  position: relative;
+`
 
-const DashboardHeader: FC = (): JSX.Element => {
+const Language = styled(Icon)`
+
+
+
+`
+
+const SelectLang = styled.div<{ open: boolean }>`
+  position: absolute;
+  top: 40px;
+  right: 0;
+  display: ${props => props.open ? 'flex' : 'none'};
+  flex-direction: column;
+  padding: 8px 8px;
+  border-radius: 5px;
+  background: #fff;
+  -webkit-box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.15);
+
+`
+
+const SelectLangItem = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 5px;
+  transition: all .1s ease;
+  margin: 0 0 4px;
+  cursor: pointer;
+
+  &:hover {
+    transition: all .1s ease;
+    background-color: #EAEDF1;
+  }
+
+  p {
+    margin: 0;
+    color: #1e293b;
+    font-size: 14px;
+  }
+
+  svg {
+    margin-right: 8px;
+  }
+
+`
+
+interface IProps {
+}
+
+
+const DashboardHeader: FC<IProps> = (): JSX.Element => {
+    const {i18n} = useTranslation();
+    const [openLang, setOpenLang] = useState<boolean>(false)
+
+    const changeLang = (lang: string): void => {
+        i18n.changeLanguage(lang)
+        setOpenLang(false)
+    }
+
     return <Main>
         <More>
             <HiOutlineMenu />
         </More>
         <RightSection>
+            <LangContainer>
+                <Language onClick={() => setOpenLang(!openLang)}>
+                    <Usa />
+
+                </Language>
+                <SelectLang
+                    open={openLang}>
+                    <SelectLangItem onClick={() => changeLang('en')}>
+                        <Usa />
+                        <p>English</p>
+                    </SelectLangItem>
+                    <SelectLangItem onClick={() => changeLang('en')}>
+                        <Tr />
+                        <p>Turkish</p>
+                    </SelectLangItem>
+
+                </SelectLang>
+            </LangContainer>
             <Icon>
                 <BsArrowsFullscreen id="fullScreen" />
             </Icon>
