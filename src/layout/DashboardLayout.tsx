@@ -1,8 +1,10 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {Outlet} from 'react-router-dom';
 import styled from 'styled-components';
 import DashboardSidebar from '../components/DashboardSidebar';
 import DashboardHeader from '../components/DashboardHeader';
+import SidebarContextProvider from "../hooks/SidebarContextProvider";
+import SidebarContext from "../hooks/SidebarContext";
 
 const Main = styled.div`
   position: relative;
@@ -35,16 +37,21 @@ const Content = styled.div<{ isOpen: boolean }>`
 `;
 
 const DashboardLayout: FC = (): JSX.Element => {
-        const [isOpen, setIsOpen] = useState<boolean>(true)
+        const {isOpen} = useContext(SidebarContext)
+        console.log(isOpen)
+
+
         return (
             <Main>
-                <SideBar isOpen={isOpen}>
-                    <DashboardSidebar />
-                </SideBar>
-                <Content isOpen={isOpen}>
-                    <DashboardHeader />
-                    <Outlet />
-                </Content>
+
+                    <SideBar isOpen={isOpen}>
+                        <DashboardSidebar />
+                    </SideBar>
+                    <Content isOpen={isOpen}>
+                        <DashboardHeader />
+                        <Outlet />
+                    </Content>
+
             </Main>
         );
     }

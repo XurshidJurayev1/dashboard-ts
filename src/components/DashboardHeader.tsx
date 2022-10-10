@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import styled from "styled-components";
 import {HiOutlineMenu, HiOutlineChatAlt2} from 'react-icons/hi'
 import {BsArrowsFullscreen, BsBookmark} from 'react-icons/bs'
@@ -8,6 +8,7 @@ import {ReactComponent as Usa} from "../assets/svg/US.svg";
 import {ReactComponent as Tr} from "../assets/svg/TR.svg";
 import i18Next from "../i18Next";
 import {useTranslation} from "react-i18next";
+import SidebarContext from "../hooks/SidebarContext";
 
 const Main = styled.div`
   display: flex;
@@ -169,15 +170,17 @@ interface IProps {
 
 const DashboardHeader: FC<IProps> = (): JSX.Element => {
     const {i18n} = useTranslation();
+    const {isOpen, setIsOpen} = useContext(SidebarContext)
     const [openLang, setOpenLang] = useState<boolean>(false)
 
     const changeLang = (lang: string): void => {
         i18n.changeLanguage(lang)
         setOpenLang(false)
     }
+    console.log(isOpen)
 
     return <Main>
-        <More>
+        <More onClick={() => setIsOpen(!isOpen)}>
             <HiOutlineMenu />
         </More>
         <RightSection>
