@@ -9,6 +9,8 @@ import {HiOutlineClipboardCheck} from 'react-icons/hi'
 import SidebarSelectComponent from "./SidebarSelectComponent";
 
 import {ReactComponent as Logo} from "../assets/svg/logo.svg";
+import RouteTitle from "./RouteTitle";
+import RouteLink from "./RouteLink";
 
 
 const Main = styled.div`
@@ -153,62 +155,6 @@ const RouteElement = styled.div`
 
 `
 
-const RouteTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px 10px;
-  line-height: 1.5;
-
-  p {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    color: #818CF8;
-    margin: 0;
-  }
-
-  span {
-    font-size: 11px;
-    color: #7A7E89;
-    font-weight: 600;
-  }
-`
-
-
-const RouteLink = styled(Link)`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  padding: 10px;
-  color: #9FA2AA;
-  background: transparent;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-bottom: 4px;
-  transition: all .1s ease;
-
-  &:hover {
-    transition: all .1s ease;
-    background: #ffffff1f;
-    color: #fff;
-  }
-
-  svg {
-    width: 24px;
-    height: 24px;
-    margin-right: 18px;
-  }
-
-  p {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 14px;
-    text-transform: capitalize;
-  }
-`
-
 
 const DashboardSidebar: FC = (): JSX.Element => {
 
@@ -253,49 +199,17 @@ const DashboardSidebar: FC = (): JSX.Element => {
                 </AvatarText>
             </SidebarHeaderAvatar>
             <RouteElement>
-                <RouteTitle>
-                    <p>
-                        dashboards
-                    </p>
-                    <span>
-                         Unique dashboard designs
-                    </span>
-                </RouteTitle>
-                <RouteLink to="#">
-                    <HiOutlineClipboardCheck />
-                    <p>
-                        project
-                    </p>
-                </RouteLink>
-                <RouteLink to="#">
-                    <HiOutlineClipboardCheck />
-                    <p>
-                        project
-                    </p>
-                </RouteLink>
-                <RouteLink to="#">
-                    <HiOutlineClipboardCheck />
-                    <p>
-                        project
-                    </p>
-                </RouteLink>
+                <RouteTitle title="dashboards" subTitle=" Unique dashboard designs " />
+                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
+                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
+                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
+
             </RouteElement>
             <RouteElement>
-                <RouteTitle>
-                    <p>
-                        applications
-                    </p>
-                    <span>
-                          Custom made application designs
-                    </span>
-                </RouteTitle>
-                <RouteLink to="#">
-                    <HiOutlineClipboardCheck />
-                    <p>
-                        project
-                    </p>
-                </RouteLink>
-                {/*<SidebarSelectComponent />*/}
+                <RouteTitle title="applications" subTitle=" Custom made application designs " />
+                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
+
+                <SidebarSelectComponent />
             </RouteElement>
         </SidebarHeader>
     </Main>;
