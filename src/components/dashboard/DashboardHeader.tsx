@@ -4,11 +4,10 @@ import {HiOutlineMenu, HiOutlineChatAlt2} from 'react-icons/hi'
 import {BsArrowsFullscreen, BsBookmark} from 'react-icons/bs'
 import {AiOutlineSearch} from 'react-icons/ai'
 import {TbInbox} from 'react-icons/tb'
-import {ReactComponent as Usa} from "../assets/svg/US.svg";
-import {ReactComponent as Tr} from "../assets/svg/TR.svg";
-import i18Next from "../i18Next";
+import {ReactComponent as Usa} from "../../assets/svg/US.svg";
+import {ReactComponent as Tr} from "../../assets/svg/TR.svg";
 import {useTranslation} from "react-i18next";
-import SidebarContext from "../hooks/SidebarContext";
+import SidebarContext from "../../hooks/SidebarContext";
 
 const Main = styled.div`
   display: flex;

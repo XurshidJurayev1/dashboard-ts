@@ -1,9 +1,8 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {Outlet} from 'react-router-dom';
 import styled from 'styled-components';
-import DashboardSidebar from '../components/DashboardSidebar';
-import DashboardHeader from '../components/DashboardHeader';
-import SidebarContextProvider from "../hooks/SidebarContextProvider";
+import DashboardSidebar from '../components/dashboard/DashboardSidebar';
+import DashboardHeader from '../components/dashboard/DashboardHeader';
 import SidebarContext from "../hooks/SidebarContext";
 
 const Main = styled.div`
@@ -24,6 +23,8 @@ const SideBar = styled.div<{ isOpen: boolean }>`
   top: 0;
   left: ${(props) => (props.isOpen ? '0px' : '-300px')};
   transition: all .3s ease-in-out;
+  height: 100%;
+  background-color: #0F172A;
 `;
 
 const Content = styled.div<{ isOpen: boolean }>`
@@ -44,13 +45,13 @@ const DashboardLayout: FC = (): JSX.Element => {
         return (
             <Main>
 
-                    <SideBar isOpen={isOpen}>
-                        <DashboardSidebar />
-                    </SideBar>
-                    <Content isOpen={isOpen}>
-                        <DashboardHeader />
-                        <Outlet />
-                    </Content>
+                <SideBar isOpen={isOpen}>
+                    <DashboardSidebar />
+                </SideBar>
+                <Content isOpen={isOpen}>
+                    <DashboardHeader />
+                    <Outlet />
+                </Content>
 
             </Main>
         );

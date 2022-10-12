@@ -3,12 +3,11 @@ import styled from "styled-components";
 import {HiOutlineBell} from 'react-icons/hi'
 import {BsPersonCircle} from 'react-icons/bs'
 
-import Avatar from '../assets/img/brian-hughes.jpg'
-import {Link} from "react-router-dom";
+import Avatar from '../../assets/img/brian-hughes.jpg'
 import {HiOutlineClipboardCheck} from 'react-icons/hi'
 import SidebarSelectComponent from "./SidebarSelectComponent";
 
-import {ReactComponent as Logo} from "../assets/svg/logo.svg";
+import {ReactComponent as Logo} from "../../assets/svg/logo.svg";
 import RouteTitle from "./RouteTitle";
 import RouteLink from "./RouteLink";
 
@@ -18,8 +17,10 @@ const Main = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
+  height: 100%;
   background-color: #0F172A;
   color: #fff;
+  overflow-y: scroll;
 `
 
 const SidebarHeader = styled.div`
@@ -152,6 +153,7 @@ const RouteElement = styled.div`
   flex-direction: column;
   margin: 28px 0 0;
   padding: 0 16px;
+  height: 100%;
 
 `
 
@@ -200,7 +202,7 @@ const DashboardSidebar: FC = (): JSX.Element => {
             </SidebarHeaderAvatar>
             <RouteElement>
                 <RouteTitle title="dashboards" subTitle=" Unique dashboard designs " />
-                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
+                <RouteLink path="/dashboard/content-layout" name="contentLayout" Icon={HiOutlineClipboardCheck} />
                 <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
                 <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
 
@@ -209,6 +211,7 @@ const DashboardSidebar: FC = (): JSX.Element => {
                 <RouteTitle title="applications" subTitle=" Custom made application designs " />
                 <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
 
+                <SidebarSelectComponent />
                 <SidebarSelectComponent />
             </RouteElement>
         </SidebarHeader>
