@@ -1,12 +1,11 @@
 import React, {FC, FunctionComponent, ReactSVG} from 'react';
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {HiOutlineClipboardCheck} from "react-icons/hi";
 import {SvgIconProps} from "@mui/material/SvgIcon";
 import {SvgIcon} from "@mui/material";
 
-
-const RouteLinkTag = styled(Link)`
+const RouteLinkTag = styled(NavLink)`
   display: flex;
   justify-content: left;
   align-items: center;
@@ -18,6 +17,7 @@ const RouteLinkTag = styled(Link)`
   margin-bottom: 4px;
   transition: all .1s ease;
 
+  &.active,
   &:hover {
     transition: all .1s ease;
     background: #ffffff1f;
@@ -39,7 +39,6 @@ const RouteLinkTag = styled(Link)`
   }
 `
 
-
 interface IProps {
     path: string,
     name: string,
@@ -48,7 +47,7 @@ interface IProps {
 
 const RouteLink: FC<IProps> = ({path, name, Icon}): JSX.Element => {
     return (
-        <RouteLinkTag to={path}>
+        <RouteLinkTag to={path} className={({ isActive }) => isActive ? "active" : ""}>
             <Icon />
             <p>
                 {name}
