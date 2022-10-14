@@ -130,7 +130,7 @@ interface IProps {
     Icon?: FunctionComponent
 }
 
-const SidebarSelectComponent: FC<IProps> = ({}): JSX.Element => {
+const SidebarSelectComponent: FC<IProps> = ({path, name, Icon, subLinks}): JSX.Element => {
 
 
     const options = [
@@ -151,19 +151,19 @@ const SidebarSelectComponent: FC<IProps> = ({}): JSX.Element => {
                     id="panel2a-header"
                 >
                     <div id="text">
-                        <HiOutlineClipboardCheck />
+                        <Icon />
                         <p>
-                            project
+                            {name}
                         </p>
                     </div>
                 </StyledAccordionSummary>
                 <AccordionDetails>
                     {
-                        options.map((item, idx) => {
+                        subLinks.map((item, idx) => {
                             return (
-                                <Option to="#">
+                                <Option key={idx + item.name} to={path + '/' + item.path}>
                                     <p>
-                                        {item}
+                                        {item.name}
                                     </p>
                                 </Option>
                             )

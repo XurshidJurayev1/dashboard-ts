@@ -15,6 +15,7 @@ import {ReactComponent as Logo} from "../../assets/svg/logo.svg";
 import RouteTitle from "./RouteTitle";
 import RouteLink from "./RouteLink";
 import SidebarSelectComponent from './SidebarSelectComponent';
+import navLinks from "./Navlinks";
 
 
 const Main = styled.div`
@@ -165,18 +166,6 @@ const RouteElement = styled.div`
 
 const DashboardSidebar: FC = (): JSX.Element => {
 
-    const navLinks = [
-        {name: "Bosh sahifa", link: "/dashboard/home", icon: HiOutlineClipboardCheck},
-        {name: "Monitoring", link: "/dashboard/monitoring", icon: TbHeartRateMonitor},
-        {name: "Hisob faktura", link: "/dashboard/invoice", icon: FaFileInvoiceDollar},
-        {name: "Lot raqam aniqlash", link: "/dashboard/generate-lot-id", icon: MdConfirmationNumber},
-        {name: "Buhgalteriya", link: "/dashboard/book-keeping", icon: GiBookPile},
-        {name: "O'chirilgan shart.", link: "/dashboard/removed-contracts", icon: MdDeleteSweep},
-        {name: "Qarzdorlar", link: "/dashboard/debitors", icon: TbFileInvoice},
-        {name: "Tokenlar", link: "/dashboard/monitoring-tokens", icon: GiToken},
-        {name: "Tashkilotlar", link: "/dashboard/organizations", icon: RiOrganizationChart}
-    ];
-
 
     const notify = {
         status: true,
@@ -221,24 +210,29 @@ const DashboardSidebar: FC = (): JSX.Element => {
                 <RouteTitle title="dashboards" subTitle=" Unique dashboard designs " />
                 {
                     navLinks.map((item, idx) => {
-                        return (
-                            <>
-                                <RouteLink key={idx + item.link} path={item.link} name={item.name}
-                                           Icon={item.icon} />
-                            </>
-                        )
+                        if (item.subLinks) {
+                            return <SidebarSelectComponent
+                                key={idx + item.link}
+                                path={item.link}
+                                name={item.name}
+                                Icon={item.icon}
+                                subLinks={item.subLinks}
+                            />
+                        } else {
+                            return <RouteLink
+                                key={idx + item.link}
+                                path={item.link}
+                                name={item.name}
+                                Icon={item.icon} />
+                        }
+
+
                     })
                 }
-                <SidebarSelectComponent />
 
 
             </RouteElement>
-            <RouteElement>
-                {/*<RouteTitle title="applications" subTitle=" Custom made application designs " />*/}
 
-                {/*<SidebarSelectComponent />*/}
-                <SidebarSelectComponent />
-            </RouteElement>
         </SidebarHeader>
     </Main>;
 };
