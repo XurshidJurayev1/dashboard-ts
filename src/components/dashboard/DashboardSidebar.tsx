@@ -233,7 +233,7 @@ const DashboardSidebar: FC = (): JSX.Element => {
 
                 {/*<SidebarSelectComponent />*/}
                 {/*<SidebarSelectComponent />*/}
-            </RouteElement>
+              </RouteElement>
         </SidebarHeader>
     </Main>;
 };
