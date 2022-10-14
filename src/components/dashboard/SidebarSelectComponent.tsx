@@ -56,6 +56,10 @@ const StyledSelect = styled(Accordion)`
     margin: 0 !important;
   }
 
+  &.css-15v22id-MuiAccordionDetails-root {
+    padding: 8px 0 !important;
+  }
+
   color: #9FA2AA !important;
   background: transparent !important;
   text-decoration: none;
@@ -157,7 +161,7 @@ const SidebarSelectComponent: FC<IProps> = ({path, name, Icon, subLinks}): JSX.E
                         </p>
                     </div>
                 </StyledAccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails sx={{padding: ' 8px 0 !important'}}>
                     {
                         subLinks.map((item, idx) => {
                             return (
