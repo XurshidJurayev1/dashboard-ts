@@ -19,6 +19,7 @@ const Main = styled.div`
   -webkit-box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid #DDDDDD;
 
 
   svg {
