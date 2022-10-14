@@ -2,14 +2,19 @@ import React, {FC} from 'react';
 import styled from "styled-components";
 import {HiOutlineBell} from 'react-icons/hi'
 import {BsPersonCircle} from 'react-icons/bs'
+import {HiOutlineClipboardCheck} from 'react-icons/hi'
+import {FaFileInvoiceDollar} from 'react-icons/fa'
+import {TbHeartRateMonitor, TbFileInvoice} from "react-icons/tb";
+import {GiBookPile, GiToken} from 'react-icons/gi'
+import {MdDeleteSweep, MdConfirmationNumber} from 'react-icons/md'
+import {RiOrganizationChart} from 'react-icons/ri'
+
 
 import Avatar from '../../assets/img/brian-hughes.jpg'
-import {HiOutlineClipboardCheck} from 'react-icons/hi'
-import SidebarSelectComponent from "./SidebarSelectComponent";
-
 import {ReactComponent as Logo} from "../../assets/svg/logo.svg";
 import RouteTitle from "./RouteTitle";
 import RouteLink from "./RouteLink";
+import SidebarSelectComponent from './SidebarSelectComponent';
 
 
 const Main = styled.div`
@@ -161,15 +166,15 @@ const RouteElement = styled.div`
 const DashboardSidebar: FC = (): JSX.Element => {
 
     const navLinks = [
-        {name: "Bosh sahifa", link: "/dashboard/home"} ,
-        {name: "Monitoring", link: "/dashboard/monitoring"} ,
-        {name: "Hisob faktura", link: "/dashboard/invoice"} ,
-        {name: "Lot raqam aniqlash", link: "/dashboard/generate-lot-id"} ,
-        {name: "Buhgalteriya", link: "/dashboard/book-keeping"} ,
-        {name: "O'chirilgan shart.", link: "/dashboard/removed-contracts"} ,
-        {name: "Qarzdorlar", link: "/dashboard/debitors"} ,
-        {name: "Tokenlar", link: "/dashboard/monitoring-tokens"} ,
-        {name: "Tashkilotlar", link: "/dashboard/organizations" }
+        {name: "Bosh sahifa", link: "/dashboard/home", icon: HiOutlineClipboardCheck},
+        {name: "Monitoring", link: "/dashboard/monitoring", icon: TbHeartRateMonitor},
+        {name: "Hisob faktura", link: "/dashboard/invoice", icon: FaFileInvoiceDollar},
+        {name: "Lot raqam aniqlash", link: "/dashboard/generate-lot-id", icon: MdConfirmationNumber},
+        {name: "Buhgalteriya", link: "/dashboard/book-keeping", icon: GiBookPile},
+        {name: "O'chirilgan shart.", link: "/dashboard/removed-contracts", icon: MdDeleteSweep},
+        {name: "Qarzdorlar", link: "/dashboard/debitors", icon: TbFileInvoice},
+        {name: "Tokenlar", link: "/dashboard/monitoring-tokens", icon: GiToken},
+        {name: "Tashkilotlar", link: "/dashboard/organizations", icon: RiOrganizationChart}
     ];
 
 
@@ -219,20 +224,20 @@ const DashboardSidebar: FC = (): JSX.Element => {
                         return (
                             <>
                                 <RouteLink key={idx + item.link} path={item.link} name={item.name}
-                                           Icon={ HiOutlineClipboardCheck} />
+                                           Icon={item.icon} />
                             </>
                         )
                     })
                 }
+                <SidebarSelectComponent />
 
 
             </RouteElement>
             <RouteElement>
-                <RouteTitle title="applications" subTitle=" Custom made application designs " />
-                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
+                {/*<RouteTitle title="applications" subTitle=" Custom made application designs " />*/}
 
                 {/*<SidebarSelectComponent />*/}
-                {/*<SidebarSelectComponent />*/}
+                <SidebarSelectComponent />
             </RouteElement>
         </SidebarHeader>
     </Main>;

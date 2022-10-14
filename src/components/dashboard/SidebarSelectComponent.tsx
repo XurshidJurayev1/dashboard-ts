@@ -1,7 +1,8 @@
-import React, {FC, useState} from 'react';
+import React, {FC, FunctionComponent, useState} from 'react';
 import styled from "styled-components";
 import {HiOutlineClipboardCheck, HiChevronDown} from "react-icons/hi";
 import {NavLink} from "react-router-dom";
+import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@mui/material';
 
 
 const SelectContainer = styled.div`
@@ -14,80 +15,12 @@ const SelectContainer = styled.div`
 
 `
 
-const Select = styled.div<{ open: boolean }>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  color: #9FA2AA;
-  background: transparent;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: all .1s ease;
-  cursor: pointer;
-
-  &:hover {
-    transition: all .1s ease;
-    background: #ffffff1f;
-    color: #fff;
-  }
-
-  #text {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-  }
-
-  #arrow {
-    transition: all .2s ease;
-    width: 16px;
-    height: 16px;
-    transform: rotate(${props => props.open ? "0deg" : "-90deg"});
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-
-  svg {
-    width: 24px;
-    height: 24px;
-    margin-right: 18px;
-  }
-
-  p {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 14px;
-    text-transform: capitalize;
-  }
-`
-
-type optionProps = {
-    length: number,
-    open: boolean
-}
-
-const Options = styled.div<optionProps>`
-  display: flex;
-  flex-direction: column;
-  padding: 10px 0;
-  overflow: hidden;
-  transition: all 2s ease;
-
-  height: ${props => props.open ? 'auto' : '0px'};
-
-
-`
 
 const Option = styled(NavLink)`
   display: flex;
   justify-content: left;
   align-items: center;
-  color: #9FA2AA;     
+  color: #9FA2AA;
   background: transparent;
   text-decoration: none;
   border-radius: 5px;
@@ -109,9 +42,95 @@ const Option = styled(NavLink)`
   }
 `
 
+const StyledSelect = styled(Accordion)`
+  &.MuiPaper-root-MuiAccordion-root {
+    color: #9FA2AA !important;
+    background: transparent !important;
+  }
 
-const SidebarSelectComponent: FC = (): JSX.Element => {
-    const [open, setOpen] = useState<boolean>(false)
+  &.MuiPaper-root-MuiAccordion-root {
+    margin: 0 !important;
+  }
+
+  .Mui-expanded {
+    margin: 0 !important;
+  }
+
+  color: #9FA2AA !important;
+  background: transparent !important;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all .1s ease;
+  cursor: pointer;
+
+  .MuiAccordionSummary-root.Mui-expanded {
+    min-height: 44px !important;
+  }
+
+  .MuiAccordionSummary-content {
+    margin: 0 !important;
+  }
+
+  .MuiAccordionSummary-root {
+    min-height: 44px !important;
+    border-radius: 5px;
+    padding: 0 10px !important;
+
+    &:hover {
+      transition: all .1s ease;
+      background: #ffffff1f;
+      color: #fff;
+
+      svg {
+        color: #fff;
+      }
+    }
+  }
+
+  #text {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 18px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 14px;
+      text-transform: capitalize;
+    }
+
+  }
+
+
+  svg {
+    color: #9FA2AA;
+  }
+`
+
+const StyledAccordionSummary = styled(AccordionSummary)`
+`
+
+
+type ILinks = {
+    path: string,
+    name: string,
+}
+
+interface IProps {
+    subLinks?: ILinks[]
+    path?: string,
+    name?: string,
+    Icon?: FunctionComponent
+}
+
+const SidebarSelectComponent: FC<IProps> = ({}): JSX.Element => {
 
 
     const options = [
@@ -125,30 +144,33 @@ const SidebarSelectComponent: FC = (): JSX.Element => {
 
     return (
         <SelectContainer>
-            <Select onClick={() => setOpen(!open)} open={open}>
-                <div id="text">
-                    <HiOutlineClipboardCheck />
-                    <p>
-                        project
-                    </p>
-                </div>
-                <div id="arrow">
-                    <HiChevronDown />
-                </div>
-            </Select>
-            <Options open={open} length={options.length}>
-                {
-                    options.map((item, idx) => {
-                        return (
-                            <Option to="#">
-                                <p>
-                                    {item}
-                                </p>
-                            </Option>
-                        )
-                    })
-                }
-            </Options>
+            <StyledSelect>
+                <StyledAccordionSummary
+                    expandIcon={<HiChevronDown />}
+                    aria-controls="panel2a-content"
+                    id="panel2a-header"
+                >
+                    <div id="text">
+                        <HiOutlineClipboardCheck />
+                        <p>
+                            project
+                        </p>
+                    </div>
+                </StyledAccordionSummary>
+                <AccordionDetails>
+                    {
+                        options.map((item, idx) => {
+                            return (
+                                <Option to="#">
+                                    <p>
+                                        {item}
+                                    </p>
+                                </Option>
+                            )
+                        })
+                    }
+                </AccordionDetails>
+            </StyledSelect>
         </SelectContainer>
     );
 };
