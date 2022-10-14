@@ -160,6 +160,18 @@ const RouteElement = styled.div`
 
 const DashboardSidebar: FC = (): JSX.Element => {
 
+    const navLinks = [
+        {name: "Bosh sahifa", link: "/dashboard/home"} ,
+        {name: "Monitoring", link: "/dashboard/monitoring"} ,
+        {name: "Hisob faktura", link: "/dashboard/invoice"} ,
+        {name: "Lot raqam aniqlash", link: "/dashboard/generate-lot-id"} ,
+        {name: "Buhgalteriya", link: "/dashboard/book-keeping"} ,
+        {name: "O'chirilgan shart.", link: "/dashboard/removed-contracts"} ,
+        {name: "Qarzdorlar", link: "/dashboard/debitors"} ,
+        {name: "Tokenlar", link: "/dashboard/monitoring-tokens"} ,
+        {name: "Tashkilotlar", link: "/dashboard/organizations" }
+    ];
+
 
     const notify = {
         status: true,
@@ -202,17 +214,25 @@ const DashboardSidebar: FC = (): JSX.Element => {
             </SidebarHeaderAvatar>
             <RouteElement>
                 <RouteTitle title="dashboards" subTitle=" Unique dashboard designs " />
-                <RouteLink path="/dashboard/content-layout" name="contentLayout" Icon={HiOutlineClipboardCheck} />
-                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
-                <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
+                {
+                    navLinks.map((item, idx) => {
+                        return (
+                            <>
+                                <RouteLink key={idx + item.link} path={item.link} name={item.name}
+                                           Icon={ HiOutlineClipboardCheck} />
+                            </>
+                        )
+                    })
+                }
+
 
             </RouteElement>
             <RouteElement>
                 <RouteTitle title="applications" subTitle=" Custom made application designs " />
                 <RouteLink path="#" name="project" Icon={HiOutlineClipboardCheck} />
 
-                <SidebarSelectComponent />
-                <SidebarSelectComponent />
+                {/*<SidebarSelectComponent />*/}
+                {/*<SidebarSelectComponent />*/}
             </RouteElement>
         </SidebarHeader>
     </Main>;
