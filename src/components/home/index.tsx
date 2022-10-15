@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as M from '@mui/material'
 import styled from 'styled-components'
-import {HiOutlineMenu, HiOutlineChatAlt2} from 'react-icons/hi'
+import {HiOutlineMenu, HiSearch, HiTrash} from 'react-icons/hi'
 
 
 enum TabTypes {
@@ -49,6 +49,16 @@ const SearchBar = styled.div<{ isOpen: boolean }>`
   height: 100%;
   background-color: #FFFFFF;
   border-right: 1px solid #DDDDDD;
+
+  .header {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    color: #6f6fdf;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
 `;
 
 const Main = styled.div`
@@ -153,6 +163,56 @@ const NameButton = styled(M.Button)`
     border-color: #222222 !important;
 `
 
+interface StyleProps {
+    mb: number;
+    color: string;
+}
+
+const FormGroup = styled.div`
+    height: 60px;
+    padding: 0 10px;
+    margin-bottom: ${(props: Partial<StyleProps>) => props.mb ?? 0 }px;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    svg {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: 20px;
+        transform: translateX(50%);
+    }
+`;
+
+const FormInput = styled.input`
+    height: 40px;
+    width: 100%;
+    padding: 0 10px 0 50px;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+`;
+
+const FormButton = styled.button`
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    color: ${(props: Partial<StyleProps>) => props.color ?? "inherit" };
+    margin-bottom: ${(props: Partial<StyleProps>) => props.mb ?? 0 }px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+
+    svg {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }
+`
+
 const Home = () => {
     const [ isOpen, setIsOpen ] = useState(true)
     const [ tab, setTab ] = useState<TabTypes>(TabTypes.all)
@@ -165,7 +225,41 @@ const Home = () => {
         <div>
             <Main>
                 <SearchBar isOpen={ isOpen }>
-                    Searchbar
+                    <div className="header">Qidirish</div>
+                    <form>
+                        <FormGroup>
+                            <FormInput
+                                placeholder='Kirish raqami'
+                            />
+                            <HiSearch />
+                        </FormGroup>
+                        <FormGroup>
+                            <FormInput 
+                                placeholder="Kalit so'zi"
+                            />
+                            <HiSearch />
+                        </FormGroup>
+                        <FormGroup>
+                            <FormInput
+                                placeholder='Qisqacha mazmuni'
+                            />
+                            <HiSearch />
+                        </FormGroup>
+                        <FormGroup mb={20}>
+                            <FormInput 
+                                placeholder="Bajarish muddati"
+                            />
+                            <HiSearch />
+                        </FormGroup>
+                        <FormButton type='button' color='#6f6fdf' mb={20}>
+                            <HiSearch />
+                            <span>Qidirish</span>
+                        </FormButton>
+                        <FormButton type='button' color='#545461'>
+                            <HiTrash />
+                            <span>Qidiruvni tozalash</span>
+                        </FormButton>
+                    </form>
                 </SearchBar>
 
                 <Content isOpen={ isOpen }>
@@ -173,6 +267,7 @@ const Home = () => {
                         value={ tab }
                         onChange={ handleChangeTabs }
                     >
+                        {/* buni backenddan keladigan malumotga qarab map qilsak bo'ladi */}
                         <Tab label={
                             <TabContent color='#9C27B0'>Shartnomalar <div>12</div> </TabContent>
                         } value="all" />
